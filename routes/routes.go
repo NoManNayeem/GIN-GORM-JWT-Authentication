@@ -4,6 +4,7 @@ package routes
 import (
 	"example/go-auth/controllers/auth"
 	"example/go-auth/controllers/protected"
+	"example/go-auth/controllers/public"
 	"example/go-auth/middlewares"
 
 	"github.com/gin-gonic/gin"
@@ -14,6 +15,11 @@ func SetupRoutes(router *gin.Engine) {
 	{
 		authGroup.POST("/signup", auth.Signup)
 		authGroup.POST("/login", auth.Login)
+	}
+
+	publicGroup := router.Group("/public")
+	{
+		publicGroup.GET("/", public.PublicRoute)
 	}
 
 	protectedGroup := router.Group("/protected")

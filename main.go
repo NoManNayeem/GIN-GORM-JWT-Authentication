@@ -1,9 +1,8 @@
 package main
 
 import (
-	"example/go-auth/controllers"
 	"example/go-auth/initializers"
-	"example/go-auth/middlewares"
+	"example/go-auth/routes"
 
 	"github.com/gin-gonic/gin"
 )
@@ -15,12 +14,8 @@ func init() {
 }
 
 func main() {
-	r := gin.Default()
-	// Sign Up
-	r.POST("/signup", controllers.Signup)
-	// Login
-	r.POST("/login", controllers.Login)
-	// Validate
-	r.GET("/protected", middlewares.LoginRequired, controllers.Validate)
-	r.Run()
+	router := gin.Default()
+	// Routers
+	routes.SetupRoutes(router)
+	router.Run()
 }
